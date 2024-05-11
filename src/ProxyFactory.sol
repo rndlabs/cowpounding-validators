@@ -179,6 +179,7 @@ contract ERC1967Factory {
         payable
         returns (address proxy)
     {
+        salt = _soladySalt(salt, msg.sender);
         assembly {
             // If the salt does not start with the zero address or the caller.
             if iszero(or(iszero(shr(96, salt)), eq(caller(), shr(96, salt)))) {
@@ -232,7 +233,13 @@ contract ERC1967Factory {
 
     /// @dev Returns the address of the proxy deployed with `salt`.
     function predictDeterministicAddress(bytes32 salt) public view returns (address predicted) {
+        predicted = predictDeterministicAddress(salt, msg.sender);
+    }
+
+    function predictDeterministicAddress(bytes32 salt, address msgSender) public view returns (address predicted) {
+        salt = _soladySalt(salt, msgSender);
         bytes32 hash = initCodeHash();
+
         assembly {
             // Compute and store the bytecode hash.
             mstore8(0x00, 0xff) // Write the prefix.
@@ -405,6 +412,13 @@ contract ERC1967Factory {
     function _emptyData() internal pure returns (bytes calldata data) {
         assembly {
             data.length := 0
+        }
+    }
+
+    /// @dev Helper function to combine the caller with a salt.
+    function _soladySalt(bytes32 salt, address addr) internal pure returns (bytes32 soladySalt) {
+        assembly {
+            soladySalt := or(shl(96, addr), shr(160, salt))
         }
     }
 }
