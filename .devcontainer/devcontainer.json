@@ -1,0 +1,15 @@
+{
+	"name": "Foundry",
+	"image": "mcr.microsoft.com/devcontainers/base:0",
+	"features": {
+		"ghcr.io/devcontainers/features/rust:1": {},
+		"ghcr.io/nlordell/features/foundry": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"JuanBlanco.solidity"
+			]
+		}
+	}
+}
