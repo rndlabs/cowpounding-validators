@@ -1,0 +1,4 @@
+ERC1967FactoryTest:testChangeAdmin() (gas: 124752)
+ERC1967FactoryTest:testDeterminsticDeployment() (gas: 127177)
+ERC1967FactoryTest:testImplementationForwarding() (gas: 185579)
+ERC1967FactoryTest:testUpgradeTo() (gas: 257871)
