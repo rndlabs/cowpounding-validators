@@ -5,6 +5,7 @@ libs = ["lib"]
 solc_version = "0.8.25"
 evm_version = "cancun"
 optimizer = true
-optimizer_runs = 100_00
+optimizer_runs = 100_000
+via_ir = true
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
